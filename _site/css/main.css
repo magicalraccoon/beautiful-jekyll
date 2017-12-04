@@ -9,6 +9,8 @@ body {
   position: relative;
   background: #FFF;
   
+  background: #fdf6e3;
+  
   
 }
 p {
@@ -102,6 +104,8 @@ img {
   background: #F5F5F5;
   border-bottom: 1px solid #EAEAEA;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  
+  background: #93a1a1;
   
   
 }
@@ -265,6 +269,8 @@ footer {
   border-top: 1px #EAEAEA solid;
   margin-top: 50px;
   font-size: 14px;
+  
+  background: #eee8d5;
   
   
 }

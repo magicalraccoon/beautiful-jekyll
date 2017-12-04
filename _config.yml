@@ -29,7 +29,7 @@ navbar-links:
 #    - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
 #    - Learn markdown: "http://www.markdowntutorial.com/"
 #    - GitHub Pages: "https://pages.github.com/"
-  🔗 Github: "https://github.com/magicalraccoon/"
+  Github: "https://github.com/magicalraccoon/"
   Resume: "resume"
 
 # Image to show in the navigation bar - image must be a square (width = height)
@@ -45,11 +45,11 @@ avatar: "/img/avatar-icon.jpg"
 # By default, the navigation bar and footer have a light gray background, and the main page
 # has a white background. You can specify a different background colour or a background image
 # for the navigation bar, the main page, and the footer.
-# navbar-col: "orange"
+navbar-col: "#93a1a1"
 #navbar-img: "/img/bgimage.png"
-# footer-col: "blue"
+footer-col: "#eee8d5"
 #footer-img: "/img/bgimage.png"
-# page-col: "#FF0000"
+page-col: "#fdf6e3"
 # page-img: "/img/bgimage.png"
 
 # --- Footer options --- #
