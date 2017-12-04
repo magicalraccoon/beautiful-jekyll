@@ -3,8 +3,8 @@ layout: page
 title: About
 subtitle: Linux administrator
 ---
-Self taught
+Completely self taught
 Linux administrator
 Xenofeminist Transhumanist
-
-Want to work with me? Send me an email!
+Originally from bay area
+Want to work with me? Contact me below.
