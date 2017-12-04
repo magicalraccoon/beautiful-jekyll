@@ -24,8 +24,8 @@ description: candypunk
 # List of links in the navigation bar
 navbar-links:
   About: "about"
-  Projects:
-     - Tootstream: "https://github.com/magicalraccoon/tootstream"
+  Projects: "projects"
+#     - Tootstream: "https://github.com/magicalraccoon/tootstream"
 #    - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
 #    - Learn markdown: "http://www.markdowntutorial.com/"
 #    - GitHub Pages: "https://pages.github.com/"
