@@ -3,8 +3,10 @@ layout: page
 title: About
 subtitle: Linux administrator
 ---
-Completely self taught
-Linux administrator
-Xenofeminist Transhumanist Cryptoanarchist
-Originally from bay area
-Want to work with me? Contact me below.
+Sara Murray is a self taught Linux administrator, based in Austin, Texas.  
+
+She is a [Xenofeminist](http://www.laboriacuboniks.net/) [Cryptoanarchist](http://groups.csail.mit.edu/mac/classes/6.805/articles/crypto/cypherpunks/may-crypto-manifesto.html).
+
+When not hunched over a terminal, she can be found researching linux topics and playing Dwarf Fortress or Chess.
+
+Want to work together? Contact below.
