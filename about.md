@@ -1,7 +1,6 @@
 ---
 layout: page
 title: About
-subtitle: Linux administrator
 ---
 Sara Murray is a self taught Linux administrator, based in Austin, Texas.  
 
