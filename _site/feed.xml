@@ -3,8 +3,8 @@
   <channel>
     <title>Sara Murray</title>
     <description>candypunk</description>
-    <link>http://localhost:4000</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://candypunk.io</link>
+    <atom:link href="http://candypunk.io/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
         <title>Whole Network Ad-blocking with Pi-hole</title>
@@ -13,8 +13,8 @@
           I don’t like ads. They’re invasive, intrusive, and a security risk. Web content that uses a donation or paid-premium model seems to be the way to go. If you’d like to save yourself from being bombarded by web advertisements, Pi-hole is your answer. Before I begin, I’d like to remind...
         </description>
         <pubDate>Fri, 04 Aug 2017 23:05:00 -0500</pubDate>
-        <link>http://localhost:4000/2017-08-04-Whole-Network-Ad-blocking-With-Pi-hole/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017-08-04-Whole-Network-Ad-blocking-With-Pi-hole/</guid>
+        <link>http://candypunk.io/2017-08-04-Whole-Network-Ad-blocking-With-Pi-hole/</link>
+        <guid isPermaLink="true">http://candypunk.io/2017-08-04-Whole-Network-Ad-blocking-With-Pi-hole/</guid>
       </item>
     
   </channel>
