@@ -1,0 +1,72 @@
+<ol>
+  <li><a href="https://aws.amazon.com/ec2/">Create an Ubuntu Server 16.04 t2.micro instance</a>. In the Security Group setting, allow a Custom TCP port to be open at port 9001. Your final settings should look similar to this: <img src="/img/torEC2.png" alt="" /></li>
+  <li>Generate your private key. Keep this somewhere very safe! This is what you’ll use to access your EC2 instance now and in the future. No key, no access!</li>
+  <li>Launch the server through the EC2 management console.</li>
+  <li>You’ll need to change the permissions on your private key before connecting. <code class="highlighter-rouge">$ chmod 400 &lt;PRIVATEKEY.PEM&gt;</code></li>
+  <li>Use your key to connect to your new instance. <code class="highlighter-rouge">$ ssh -i "path/to/privatekey.pem" ubuntu@INSTANCE.PUBLIC.IP.ADDRESS</code></li>
+  <li>The Tor installation contained within Apt is out of date, so we’ll need to add the official location. Open your sources list. <code class="highlighter-rouge">sudo nano /etc/apt/sources.list</code></li>
+  <li>Add the following to the end of the file:
+    <div class="highlighter-rouge"><pre class="highlight"><code> deb http://deb.torproject.org/torproject.org xenial main
+ deb-src http://deb.torproject.org/torproject.org xenial main
+</code></pre>
+    </div>
+  </li>
+  <li>You’ll also need to add the trusted key.
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
+$ gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
+</code></pre>
+    </div>
+
+    <p>Your output should look like this:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> ubuntu@ip-123-45-67-890:~$ gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
+ gpg: requesting key 886DDD89 from hkp server keys.gnupg.net
+ gpg: /home/ubuntu/.gnupg/trustdb.gpg: trustdb created
+ gpg: key 886DDD89: public key "deb.torproject.org archive signing key" imported
+ gpg: no ultimately trusted keys found
+ gpg: Total number processed: 1
+ gpg:               imported: 1  (RSA: 1)
+
+ ubuntu@ip-123-45-67-890:~$ gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
+
+ OK
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Update and upgrade out of date packages. <code class="highlighter-rouge">$ sudo apt update &amp;&amp; sudo apt upgrade -y</code> making sure to “Keep local changes” if grub gets updated.</p>
+  </li>
+  <li>
+    <p>Now we’ll be able to install the current version of Tor. <code class="highlighter-rouge">$ sudo apt install tor deb.torproject.org-keyring</code></p>
+  </li>
+  <li>
+    <p>Open your torrc file <code class="highlighter-rouge">$ sudo nano /etc/tor/torrc</code></p>
+
+    <p>In order to keep under EC2’s free bandwidth limits, we’ll have to add some info to the bottom of our torrc file:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>ORPort 9001
+ 
+Nickname &lt;A NODE NICKNAME&gt;
+ 
+RelayBandwidthRate 75 KBytes # Throttle traffic to 75KB/s (600Kbps)
+ 
+RelayBandwidthBurst 200 KBytes # But allow bursts up to 200KB (1600Kb)
+ 
+AccountingMax 1 GBytes
+ 
+AccountingStart month 3 15:00
+ 
+ExitPolicy reject *:* # no exits allowed
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Reload the Tor service. <code class="highlighter-rouge">$ sudo service tor reload</code></p>
+  </li>
+  <li>
+    <p>Restart the instance to finish applying upgrades. <code class="highlighter-rouge">$ sudo shutdown -r now</code></p>
+  </li>
+  <li>(OPTIONAL) Do it all over again!</li>
+</ol>
+
+<p>Congratulations! You’re helping support anoyminity across the globe! The Tor project works better if more people are using it, so why not also use the <a href="https://www.torproject.org/download/download-easy.html.en">Tor Browser</a> and add some helpful noise to the network!</p>

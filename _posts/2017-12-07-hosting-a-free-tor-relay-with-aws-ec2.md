@@ -63,9 +63,9 @@ $ gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
 	ExitPolicy reject *:* # no exits allowed
 	```
 
-12. Reload the Tor service. `service tor reload`
+12. Reload the Tor service. `$ sudo service tor reload`
 
-13. Restart the instance to finish applying upgrades. `sudo shutdown -r now`
+13. Restart the instance to finish applying upgrades. `$ sudo shutdown -r now`
 
 14. (OPTIONAL) Do it all over again!
 
