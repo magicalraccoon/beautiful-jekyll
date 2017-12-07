@@ -5,6 +5,7 @@ title: Hosting a free Tor Relay with AWS EC2
 ---
 
 1. Spin up an Ubuntu Server 16.04 t2.micro instance
+![]({{site.baseurl}}/{{site.baseurl}}/img/torEC2Settings.png)
 2. Generate your private key
 3. Launch the server through the EC2 management console
 4. `chmod 400` privatekey.pem
