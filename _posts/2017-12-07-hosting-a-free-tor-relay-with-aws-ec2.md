@@ -2,6 +2,7 @@
 layout: post
 published: true
 title: Hosting a free Tor Relay with AWS EC2
+date: '2017-12-07'
 ---
 
 1. [Create an Ubuntu Server 16.04 t2.micro instance](https://aws.amazon.com/ec2/). In the Security Group setting, allow a Custom TCP port to be open at port 9001. Your final settings should look similar to this: ![]({{site.baseurl}}/img/torEC2.png)
