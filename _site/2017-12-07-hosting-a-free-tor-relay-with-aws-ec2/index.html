@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Whole Network Ad-blocking with Pi-hole</title>
+  <title>Hosting a free Tor Relay with AWS EC2</title>
 
   <meta name="author" content="Sara Murray" />
 
@@ -52,19 +52,19 @@
   
 
   
-  <meta property="og:title" content="Whole Network Ad-blocking with Pi-hole" />
+  <meta property="og:title" content="Hosting a free Tor Relay with AWS EC2" />
   
 
    
-  <meta property="og:description" content="I don’t like ads. They’re invasive, intrusive, and a security risk. Web content that uses a donation or paid-premium model seems to be the way to go. If you’d like to save yourself from being bombarded by web advertisements, Pi-hole is your answer. Before I begin, I’d like to remind...">
+  <meta property="og:description" content="Create an Ubuntu Server 16.04 t2.micro instance. In the Security Group setting, allow a Custom TCP port to be open at port 9001. Your final settings should look similar to this: Generate your private key. Keep this somewhere very safe! This is what you’ll use to access your EC2 instance...">
   
 
 
   <meta property="og:type" content="website" />
 
   
-  <meta property="og:url" content="http://candypunk.io/2017-08-04-Whole-Network-Ad-blocking-With-Pi-hole/" />
-  <link rel="canonical" href="http://candypunk.io/2017-08-04-Whole-Network-Ad-blocking-With-Pi-hole/" />
+  <meta property="og:url" content="http://candypunk.io/2017-12-07-hosting-a-free-tor-relay-with-aws-ec2/" />
+  <link rel="canonical" href="http://candypunk.io/2017-12-07-hosting-a-free-tor-relay-with-aws-ec2/" />
   
 
   
@@ -78,11 +78,11 @@
   <meta name="twitter:creator" content="@magicalraccoon" />
 
   
-  <meta name="twitter:title" content="Whole Network Ad-blocking with Pi-hole" />
+  <meta name="twitter:title" content="Hosting a free Tor Relay with AWS EC2" />
   
 
   
-  <meta name="twitter:description" content="I don’t like ads. They’re invasive, intrusive, and a security risk. Web content that uses a donation or paid-premium model seems to be the way to go. If you’d like to save yourself from being bombarded by web advertisements, Pi-hole is your answer. Before I begin, I’d like to remind...">
+  <meta name="twitter:description" content="Create an Ubuntu Server 16.04 t2.micro instance. In the Security Group setting, allow a Custom TCP port to be open at port 9001. Your final settings should look similar to this: Generate your private key. Keep this somewhere very safe! This is what you’ll use to access your EC2 instance...">
   
 
   
@@ -199,11 +199,11 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="post-heading">
-          <h1>Whole Network Ad-blocking with Pi-hole</h1>
+          <h1>Hosting a free Tor Relay with AWS EC2</h1>
 		  
 		  
 		  
-		  <span class="post-meta">Posted on August 4, 2017</span>
+		  <span class="post-meta">Posted on December 7, 2017</span>
 		  
         </div>
       </div>
@@ -222,57 +222,78 @@
       
       
       <article role="main" class="blog-post">
-        <p>I don’t like ads. They’re invasive, intrusive, and a <a href="https://www.techdirt.com/articles/20160111/05574633295/forbes-site-after-begging-you-turn-off-adblocker-serves-up-steaming-pile-malware-ads.shtml">security risk</a>. Web content that uses a donation or paid-premium model seems to be the way to go. If you’d like to save yourself from being bombarded by web advertisements, Pi-hole is your answer. Before I begin, I’d like to remind you to financially support the content that you enjoy.</p>
-
-<h2 id="what-is-pi-hole">What is Pi-hole?</h2>
-<p><a href="https://pi-hole.net/">Pi-hole</a> is a lightweight DNS server that filters known advertising domains. It works by checking incoming websites against a filter list, and “black-holing” domains that match. Afterwards, it directs the cleaned up DNS traffic as usual. This process reduces excessive network traffic as well as protecting you from malvertising domains.</p>
-
-<h2 id="installing-pi-hole">Installing Pi-hole</h2>
-<h3 id="requirements">Requirements</h3>
-<p>Before beginning, you will need to have administrative access to your router.</p>
-<h4 id="hardware">Hardware</h4>
-<p>Pi-hole doesn’t require much in terms of hardware, only ~52MB of free space and 512 MB of RAM. I chose to install Pi-hole on my Raspberry Pi (which is also functioning as my NAS).</p>
-
-<h4 id="software">Software</h4>
-<p>Pi-hole is officially supported on the following platforms:</p>
-<ul>
-  <li>Raspbian: Jessie (lite / with pixel)</li>
-  <li>Ubuntu: 14.04 / 16.04 / 16.10</li>
-  <li>Fedora: 24 / 25</li>
-  <li>Debian: 8.6</li>
-  <li>CentOS: 7.2.1511 / 7.3.1611</li>
-</ul>
-
-<h3 id="automated-installation">Automated Installation</h3>
-<p>Pi-hole provides an automated install script, but I highly recommend taking a look at the source before executing bash scripts you find on the internet.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>$ wget -O basic-install.sh https://install.pi-hole.net
-$ cat basic-install.sh
+        <ol>
+  <li><a href="https://aws.amazon.com/ec2/">Create an Ubuntu Server 16.04 t2.micro instance</a>. In the Security Group setting, allow a Custom TCP port to be open at port 9001. Your final settings should look similar to this: <img src="/img/torEC2.png" alt="" /></li>
+  <li>Generate your private key. Keep this somewhere very safe! This is what you’ll use to access your EC2 instance now and in the future. No key, no access!</li>
+  <li>Launch the server through the EC2 management console.</li>
+  <li>You’ll need to change the permissions on your private key before connecting. <code class="highlighter-rouge">$ chmod 400 &lt;PRIVATEKEY.PEM&gt;</code></li>
+  <li>Use your key to connect to your new instance. <code class="highlighter-rouge">$ ssh -i "path/to/privatekey.pem" ubuntu@INSTANCE.PUBLIC.IP.ADDRESS</code></li>
+  <li>The Tor installation contained within Apt is out of date, so we’ll need to add the official location. Open your sources list. <code class="highlighter-rouge">sudo nano /etc/apt/sources.list</code></li>
+  <li>Add the following to the end of the file:
+    <div class="highlighter-rouge"><pre class="highlight"><code> deb http://deb.torproject.org/torproject.org xenial main
+ deb-src http://deb.torproject.org/torproject.org xenial main
 </code></pre>
-</div>
-<p>If the code is acceptable, go ahead and run the installer script:
-<code class="highlighter-rouge">$ bash basic-install.sh</code></p>
+    </div>
+  </li>
+  <li>You’ll also need to add the trusted key.
+    <div class="highlighter-rouge"><pre class="highlight"><code>$ gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
+$ gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
+</code></pre>
+    </div>
 
-<p>The on-screen instructions are straightforward, and provide good default options.</p>
+    <p>Your output should look like this:</p>
 
-<p><img src="/img/pihole1.png" alt="Pi-hole settings" /></p>
+    <div class="highlighter-rouge"><pre class="highlight"><code> ubuntu@ip-123-45-67-890:~$ gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
+ gpg: requesting key 886DDD89 from hkp server keys.gnupg.net
+ gpg: /home/ubuntu/.gnupg/trustdb.gpg: trustdb created
+ gpg: key 886DDD89: public key "deb.torproject.org archive signing key" imported
+ gpg: no ultimately trusted keys found
+ gpg: Total number processed: 1
+ gpg:               imported: 1  (RSA: 1)
 
-<p>At this point you’ll want to direct a web browser to the IP address of the device that you installed Pi-hole.
-In my case, <code class="highlighter-rouge">http://10.0.2.15/admin/index.php</code></p>
+ ubuntu@ip-123-45-67-890:~$ gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
 
-<p>After logging in, you’ll be greeted with a screen that looks like this
-<img src="/img/pihole2.png" alt="Pi-hole settings" /></p>
+ OK
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Update and upgrade out of date packages. <code class="highlighter-rouge">$ sudo apt update &amp;&amp; sudo apt upgrade -y</code> making sure to “Keep local changes” if grub gets updated.</p>
+  </li>
+  <li>
+    <p>Now we’ll be able to install the current version of Tor. <code class="highlighter-rouge">$ sudo apt install tor deb.torproject.org-keyring</code></p>
+  </li>
+  <li>
+    <p>Open your torrc file <code class="highlighter-rouge">$ sudo nano /etc/tor/torrc</code></p>
 
-<p>From here, I recommend going to the Settings tab and expanding the Pi-Hole’s Block Lists box.
-The default Pi-hole filters may work for you, but I wanted extra privacy. <a href="https://wally3k.github.io/about.html">WaLLy3K</a> was nice enough to provide a <a href="https://v.firebog.net/hosts/lists.php?type=tick">sourced list of sites</a> to add to your filter.<br />
-You’ll be able to copy this list in entirety into the text box, then save and update your filters.</p>
+    <p>In order to keep under EC2’s free bandwidth limits, we’ll have to add some info to the bottom of our torrc file:</p>
 
-<p><strong>Don’t forget to click the Enable tab!</strong></p>
+    <div class="highlighter-rouge"><pre class="highlight"><code>ORPort 9001
+ 
+Nickname &lt;A NODE NICKNAME&gt;
+ 
+RelayBandwidthRate 75 KBytes # Throttle traffic to 75KB/s (600Kbps)
+ 
+RelayBandwidthBurst 200 KBytes # But allow bursts up to 200KB (1600Kb)
+ 
+AccountingMax 1 GBytes
+ 
+AccountingStart month 3 15:00
+ 
+ExitPolicy reject *:* # no exits allowed
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Reload the Tor service. <code class="highlighter-rouge">service tor reload</code></p>
+  </li>
+  <li>
+    <p>Restart the instance to finish applying upgrades. <code class="highlighter-rouge">sudo shutdown -r now</code></p>
+  </li>
+  <li>(OPTIONAL) Do it all over again!</li>
+</ol>
 
-<p>Now, in order to get the filters to apply to your entire network, you’ll need to go to your router’s configuration page. Use the IP address of your Pi-hole device as a Static DNS.</p>
-
-<p>If you are unable to change your DNS settings, Pi-hole also offers a built-in DHCP server.</p>
-
-<p>Once this is all done, it’s a good idea to reboot your router so that your new DNS settings take effect.</p>
+<p>Congratulations! You’re helping support anoyminity across the globe! The Tor project works better if more people are using it, so why not also use the <a href="https://www.torproject.org/download/download-easy.html.en">Tor Browser</a> and add some helpful noise to the network!</p>
 
       </article>
 
@@ -289,7 +310,7 @@ You’ll be able to copy this list in entirety into the text box, then save and 
 
   
   <!--- Share on Twitter -->
-    <a href="https://twitter.com/intent/tweet?text=Whole+Network+Ad-blocking+with+Pi-hole+http://candypunk.io/2017-08-04-Whole-Network-Ad-blocking-With-Pi-hole/"
+    <a href="https://twitter.com/intent/tweet?text=Hosting+a+free+Tor+Relay+with+AWS+EC2+http://candypunk.io/2017-12-07-hosting-a-free-tor-relay-with-aws-ec2/"
       class="btn btn-social-icon btn-twitter" title="Share on Twitter">
       <span class="fa fa-fw fa-twitter" aria-hidden="true"></span>
       <span class="sr-only">Twitter</span>
@@ -302,7 +323,7 @@ You’ll be able to copy this list in entirety into the text box, then save and 
 
   
   <!--- Share on LinkedIn -->
-    <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://candypunk.io/2017-08-04-Whole-Network-Ad-blocking-With-Pi-hole/"
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://candypunk.io/2017-12-07-hosting-a-free-tor-relay-with-aws-ec2/"
       class="btn btn-social-icon btn-linkedin" title="Share on LinkedIn">
       <span class="fa fa-fw fa-linkedin" aria-hidden="true"></span>
       <span class="sr-only">LinkedIn</span>
@@ -317,10 +338,10 @@ You’ll be able to copy this list in entirety into the text box, then save and 
 
       <ul class="pager blog-pager">
         
-        
-        <li class="next">
-          <a href="/2017-12-07-hosting-a-free-tor-relay-with-aws-ec2/" data-toggle="tooltip" data-placement="top" title="Hosting a free Tor Relay with AWS EC2">Next Post &rarr;</a>
+        <li class="previous">
+          <a href="/2017-08-04-Whole-Network-Ad-blocking-With-Pi-hole/" data-toggle="tooltip" data-placement="top" title="Whole Network Ad-blocking with Pi-hole">&larr; Previous Post</a>
         </li>
+        
         
       </ul>
 
