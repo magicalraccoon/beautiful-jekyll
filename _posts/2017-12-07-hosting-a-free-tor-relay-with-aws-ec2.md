@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title: Hosting a free Tor Relay with AWS EC2
 ---
 
