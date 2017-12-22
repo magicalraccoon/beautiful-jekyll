@@ -1,5 +1,5 @@
 SARA MURRAY
-Austin, TX | http://candypunk.io | saramurray@candypunk.io
+Sacramento, CA | http://candypunk.io | saramurray@candypunk.io
 
 SYSTEM ADMINISTRATOR
  * Experience configuring, monitoring, upgrading and maintaining systems hardware, software and related infrastructure.
@@ -40,5 +40,5 @@ TECHNICAL SKILLS
  * DNS
  * IPtables
 
-
-Reference available upon request
+Able to relocate
+References available upon request
