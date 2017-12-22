@@ -1,0 +1,51 @@
+<p>I don’t like ads. They’re invasive, intrusive, and a <a href="https://www.techdirt.com/articles/20160111/05574633295/forbes-site-after-begging-you-turn-off-adblocker-serves-up-steaming-pile-malware-ads.shtml">security risk</a>. Web content that uses a donation or paid-premium model seems to be the way to go. If you’d like to save yourself from being bombarded by web advertisements, Pi-hole is your answer. Before I begin, I’d like to remind you to financially support the content that you enjoy.</p>
+
+<h2 id="what-is-pi-hole">What is Pi-hole?</h2>
+<p><a href="https://pi-hole.net/">Pi-hole</a> is a lightweight DNS server that filters known advertising domains. It works by checking incoming websites against a filter list, and “black-holing” domains that match. Afterwards, it directs the cleaned up DNS traffic as usual. This process reduces excessive network traffic as well as protecting you from malvertising domains.</p>
+
+<h2 id="installing-pi-hole">Installing Pi-hole</h2>
+<h3 id="requirements">Requirements</h3>
+<p>Before beginning, you will need to have administrative access to your router.</p>
+<h4 id="hardware">Hardware</h4>
+<p>Pi-hole doesn’t require much in terms of hardware, only ~52MB of free space and 512 MB of RAM. I chose to install Pi-hole on my Raspberry Pi (which is also functioning as my NAS).</p>
+
+<h4 id="software">Software</h4>
+<p>Pi-hole is officially supported on the following platforms:</p>
+<ul>
+  <li>Raspbian: Jessie (lite / with pixel)</li>
+  <li>Ubuntu: 14.04 / 16.04 / 16.10</li>
+  <li>Fedora: 24 / 25</li>
+  <li>Debian: 8.6</li>
+  <li>CentOS: 7.2.1511 / 7.3.1611</li>
+</ul>
+
+<h3 id="automated-installation">Automated Installation</h3>
+<p>Pi-hole provides an automated install script, but I highly recommend taking a look at the source before executing bash scripts you find on the internet.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ wget -O basic-install.sh https://install.pi-hole.net
+$ cat basic-install.sh
+</code></pre>
+</div>
+<p>If the code is acceptable, go ahead and run the installer script:
+<code class="highlighter-rouge">$ bash basic-install.sh</code></p>
+
+<p>The on-screen instructions are straightforward, and provide good default options.</p>
+
+<p><img src="/img/pihole1.png" alt="Pi-hole settings" /></p>
+
+<p>At this point you’ll want to direct a web browser to the IP address of the device that you installed Pi-hole.
+In my case, <code class="highlighter-rouge">http://10.0.2.15/admin/index.php</code></p>
+
+<p>After logging in, you’ll be greeted with a screen that looks like this
+<img src="/img/pihole2.png" alt="Pi-hole settings" /></p>
+
+<p>From here, I recommend going to the Settings tab and expanding the Pi-Hole’s Block Lists box.
+The default Pi-hole filters may work for you, but I wanted extra privacy. <a href="https://wally3k.github.io/about.html">WaLLy3K</a> was nice enough to provide a <a href="https://v.firebog.net/hosts/lists.php?type=tick">sourced list of sites</a> to add to your filter.<br />
+You’ll be able to copy this list in entirety into the text box, then save and update your filters.</p>
+
+<p><strong>Don’t forget to click the Enable tab!</strong></p>
+
+<p>Now, in order to get the filters to apply to your entire network, you’ll need to go to your router’s configuration page. Use the IP address of your Pi-hole device as a Static DNS.</p>
+
+<p>If you are unable to change your DNS settings, Pi-hole also offers a built-in DHCP server.</p>
+
+<p>Once this is all done, it’s a good idea to reboot your router so that your new DNS settings take effect.</p>

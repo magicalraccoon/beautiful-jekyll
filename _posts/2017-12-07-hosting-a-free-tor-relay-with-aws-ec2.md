@@ -10,7 +10,7 @@ date: '2017-12-07'
 3. Launch the server through the EC2 management console.
 4. You'll need to change the permissions on your private key before connecting. `$ chmod 400 <PRIVATEKEY.PEM>`
 5. Use your key to connect to your new instance. `$ ssh -i "path/to/privatekey.pem" ubuntu@INSTANCE.PUBLIC.IP.ADDRESS`
-6. The Tor installation contained within Apt is out of date, so we'll need to add the official location. Open your sources list. `sudo nano /etc/apt/sources.list`
+6. The Tor installation contained within Apt is out of date, so we'll need to add the official location. Open your sources list. `$ sudo nano /etc/apt/sources.list`
 7. Add the following to the end of the file:
 	```
 	deb http://deb.torproject.org/torproject.org xenial main
@@ -63,9 +63,9 @@ $ gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
 	ExitPolicy reject *:* # no exits allowed
 	```
 
-12. Reload the Tor service. `service tor reload`
+12. Reload the Tor service. `$ sudo service tor reload`
 
-13. Restart the instance to finish applying upgrades. `sudo shutdown -r now`
+13. Restart the instance to finish applying upgrades. `$ sudo shutdown -r now`
 
 14. (OPTIONAL) Do it all over again!
 
