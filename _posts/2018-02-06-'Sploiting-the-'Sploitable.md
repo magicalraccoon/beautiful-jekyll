@@ -1,5 +1,3 @@
-# 'Sploiting the 'Sploitable
-
 I've always had a casual interest in exploring penetration testing. Over the last week I've taken to seeing what I could learn through my own exploration!
 
 A few assumptions are made with this write-up.
@@ -26,7 +24,7 @@ Time to get more information on our target. We can use nmap to scan for TCP port
 - -sV to check open ports and version information
 - -O to try to guess the operating system
 
-![nmap result](/img/metasploitable/metaspoitable1.png)
+![nmap result](/img/metasploitable/metasploitable1.png)
 Lots of open ports! This is obviously on purpose. This gives us great information-- we can see what software and version number applies to each port.
 
 ## Enumeration for fun and profit
