@@ -41,6 +41,7 @@ With some grepping and cutting, we can easily isolate a list of users for use la
 Boot up the metasploit console (`msfconsole`). With this, we can search for and execute various exploits. Let's look up vsftpd version 2.3.4
 
 `search vsftpd 2.3.4`
+
 ![Search vsftpd](/img/metasploitable/metasploitable2.png)
 Aha! An excellent backdoor exploit. We're given the namespace to the exploit, which we'll use to execute it.
 
@@ -56,7 +57,7 @@ Press Enter, and you'll have gained access to a remote shell!
 ![remote shell](/img/metasploitable/metasploitable3.png)
 
 ### ssh (port 22)
-We can employ a similar method try and gain access to port 22. With metasploit still open, we'll use a common ssh login check scanner (https://www.offensive-security.com/metasploit-unleashed/scanner-ssh-auxiliary-modules/).
+We can employ a similar method to try and gain access to port 22. With metasploit still open, we'll use a [common ssh login check scanner](https://www.offensive-security.com/metasploit-unleashed/scanner-ssh-auxiliary-modules/).
 
 `use auxillary/scanner/ssh/ssh_login`
 
@@ -69,6 +70,7 @@ Additionally, we'll want to `set user_as_pass true`. This might save us some tim
 In order to watch the brute force in action, we'll need to `set verbose true`.
 
 Now a quick `run` should enumerate through the users file, trying each username as its own password.
+
 ![trial](/img/metasploitable/metasploitable4.png)
 Not bad!
 
@@ -96,4 +98,5 @@ Returning to our ssh'd Metasploitable terminal, we're finally going to execute o
 It wont look like anything is happening, but if we run `id` through our Kali terminal, we'll see that we're now `uid=0(root) gid=0(root)`! Just to make sure we're not seeing our Kali id, we'll check `uname -a` again.
 
 ![payload executed](/img/metasploitable/metasploitable5.png)
+
 I hope you learned as much as I did! Of course, there are plenty of other ways to exploit vulnerable machines, and it's been an incredibly fun journey trying to figure out this much. I'm excited to learn more!
