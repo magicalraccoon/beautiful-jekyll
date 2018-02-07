@@ -77,7 +77,6 @@ Not bad!
 With the newfound limited user accounts that we now have access to, our next step is to elevate our user level. The whole point was to get root access, right?
 
 What can we find by exploring the `user` user? Starting off with `uname -a` will give us details about the system. Through this, we can pick out the kernel version- 2.6.14. Let's dive into some CVEs! Some quick searching will give us [CVE-2009-1185](http://www.exploit-db.com/exploits/8572/). This exploits a Netlink in order to execute a payload from /tmp/run AS ROOT!!. Netlink is a way to pass data back and forth between the kernel and user-space.
-https://linux-hacking-guide.blogspot.com/2015/05/metasploitable-2-privilege-escalation.html
 
 We'll need to enable an external internet connection in order to download the exploit. While logged into the `user` account, `wget https://www.exploit-db.com/download/8572.c` (as always, audit all code you download!). Next, we'll need to compile our C code with `gcc -o exploit 8572.c`. This will create an executable named `exploit` that we can pass an argument to.
 
