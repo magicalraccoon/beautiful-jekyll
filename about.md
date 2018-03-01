@@ -2,10 +2,6 @@
 layout: page
 title: About
 ---
-Sara Murray is a self taught Linux administrator, based in Austin, Texas.  
+Sara Murray’s love of computers and networking led her to become a self-taught Linux system administrator, with skills ranging from installing and configuring hardware and software to monitoring and maintaining existing systems and infrastructure. Her interests include penetration testing, command line interfaces, and chess.
 
-She is a [Xenofeminist](http://www.laboriacuboniks.net/) [Cryptoanarchist](http://groups.csail.mit.edu/mac/classes/6.805/articles/crypto/cypherpunks/may-crypto-manifesto.html).
-
-When not hunched over a terminal, she can be found researching linux topics and playing Dwarf Fortress or chess.
-
-Want to work together? Contact below.
+Let's work together to make something better.
