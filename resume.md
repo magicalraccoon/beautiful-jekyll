@@ -7,7 +7,7 @@ title:  "Resume"
 
 SARA MURRAY
 
-Austin, TX * http://candypunk.io * saramurray@candypunk.io
+San Francisco Bay Area * http://candypunk.io * saramurray@candypunk.io
 
 SYSTEM ADMINISTRATOR
  * Experience configuring, monitoring, upgrading and maintaining systems hardware, software and related infrastructure.
